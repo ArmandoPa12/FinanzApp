@@ -23,14 +23,14 @@ class TransaccionesImport implements ToModel, WithHeadingRow
         $tipoPagoTexto = strtolower(trim($row['tipo_pago'] ?? ''));
         $tipo = $tipoTexto === 'entrada'? false : true;
         $tipoPago = $tipoPagoTexto === 'transferencia' ? true : false;
-        $categoria = Categoria::where('nombre', $row['categoria'] ?? '')->first();
+        $categoria = Categoria::where('nombre', $row['categoria_id'] ?? '')->first();
         return new Transaccion([
             'tipo' => $tipo,
             'monto' => $row['monto'] ?? 0,
             'tipo_pago' => $tipoPago,
             'descripcion' => $row['descripcion'] ?? null,
             'categoria_id' => $categoria?->id, // null-safe
-            'persona_id' => Auth::id(),
+            'usuario_id' => Auth::id(),
             'fecha' => $row['fecha'] ?? now()->toDateString(),  
         ]);
     }

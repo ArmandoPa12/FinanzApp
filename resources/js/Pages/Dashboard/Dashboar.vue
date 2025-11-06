@@ -116,7 +116,7 @@
             </th> -->
             <th class="p-1 border-b border-slate-300 bg-slate-50">
               <p class="block text-sm font-normal leading-none text-slate-500">
-                Persona
+                Usuario
               </p>
             </th>
             <th class="p-1 border-b border-slate-300 bg-slate-50">
@@ -157,7 +157,7 @@
             </td>
             <td class="p-1 border-b border-slate-200">
               <p class="block text-sm text-slate-800">
-                {{ tran.persona.nombre || '' }}
+                {{ tran.usuario.username || '' }}
               </p>
             </td>
             <td class="p-1  border-slate-200">
@@ -257,6 +257,7 @@ function cleanFilters() {
 
 watch(filters, applyFilters, { deep: true })
 
+// console.log(transacciones.value);
 
 
 

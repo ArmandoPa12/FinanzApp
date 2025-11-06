@@ -10,7 +10,7 @@ class Transaccion extends Model
 
     protected $fillable = [
         'tipo', 'monto', 'tipo_pago', 'descripcion',
-        'categoria_id', 'fecha', 'persona_id',
+        'categoria_id', 'fecha', 'usuario_id',
     ];
 
     public function categoria()
@@ -18,8 +18,8 @@ class Transaccion extends Model
         return $this->belongsTo(Categoria::class);
     }
 
-    public function persona()
+    public function usuario()
     {
-        return $this->belongsTo(Persona::class);
+        return $this->belongsTo(Usuario::class);
     }
 }

@@ -42,7 +42,7 @@ class TransaccionController extends Controller
             'fecha' => 'required|date',
         ], $message);
 
-        $validated['persona_id'] = Auth::id();
+        $validated['usuario_id'] = Auth::id();
 
         Transaccion::create($validated);
         return redirect()->back()->with('success', 'Transacción creada correctamente');
@@ -78,11 +78,11 @@ class TransaccionController extends Controller
             'tipo_pago' => 'required',
             'descripcion' => 'nullable|string',
             'categoria_id' => 'exists:categorias,id',
-            'persona_id' => 'nullable|exists:personas,id',
+            'usuario_id' => 'nullable|exists:usuario,id',
             'fecha' => 'required|date',
         ], $message);
 
-        $validated['persona_id'] = Auth::id();
+        $validated['usuario_id'] = Auth::id();
 
         $transaccion->update($validated);
         return redirect()->route('transaccion')->with('success', 'Transacción actualizada correctamente');

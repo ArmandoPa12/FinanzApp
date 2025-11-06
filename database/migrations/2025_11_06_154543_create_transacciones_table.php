@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -19,16 +18,15 @@ return new class extends Migration
             $table->text('descripcion')->nullable();
 
             $table->foreignId('categoria_id')
-                  ->nullable()
-                  ->constrained('categorias')
-                  ->nullOnDelete(); // Si se borra la categoría, no borra la transacción
+                ->nullable()
+                ->constrained('categorias')
+                ->nullOnDelete(); // Si se borra la categoría, no borra la transacción
 
-            $table->foreignId('persona_id')
-                  ->nullable()
-                  ->constrained('personas')
-                  ->nullOnDelete();
+            $table->foreignId('usuario_id')
+                ->nullable()
+                ->constrained('usuarios')
+                ->nullOnDelete();
             $table->date('fecha'); // fecha real de la transacción
-
             $table->timestamps();
         });
     }

@@ -72,7 +72,7 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import Layout from '../../Layout/Layout.vue';
-import { usePage } from '@inertiajs/vue3';
+import { router, usePage } from '@inertiajs/vue3';
 
 const page = usePage()
 const transacciones = computed(() => page.props.transacciones)

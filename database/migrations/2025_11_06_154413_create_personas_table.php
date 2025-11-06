@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 100);
-            $table->string('username', 50)->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('apellido', 100);
+            $table->string('carnet', 100)->unique();  
+            $table->foreignId('telefono_id')
+                  ->nullable()
+                  ->constrained('telefonos')
+                  ->nullOnDelete();
             $table->timestamps();
         });
     }

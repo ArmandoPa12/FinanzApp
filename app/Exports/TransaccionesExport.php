@@ -15,7 +15,7 @@ class TransaccionesExport implements FromCollection, WithHeadings, WithMapping
     */
     public function collection()
     {
-        return Transaccion::with(['categoria','persona'])->orderBy('fecha','asc')->get();
+        return Transaccion::with(['categoria','usuario'])->orderBy('fecha','asc')->get();
     }
 
     public function headings():array{
@@ -25,7 +25,7 @@ class TransaccionesExport implements FromCollection, WithHeadings, WithMapping
             'tipo_pago',
             'descripción',
             'categoria_id',
-            'persona_id',
+            'usuario_id',
             'fecha',
         ];
     }
@@ -39,7 +39,7 @@ class TransaccionesExport implements FromCollection, WithHeadings, WithMapping
             $tipoPago,
             $tran->descripcion ?? '',
             $tran->categoria->nombre ?? '',
-            $tran->persona->nombre ?? '',
+            $tran->usuario->username ?? '',
             $tran->fecha,
         ];
     }

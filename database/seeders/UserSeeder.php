@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Telefono;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,8 +16,20 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('personas')->insert([
-            ['nombre' => 'Armando', 'username' => 'admin', 'password' => bcrypt('123')],
+        $telefono_id = DB::table('telefonos')->insertGetId( [
+            'numero' => '+59170015157'
+        ]); 
+        $persona_id =  DB::table('personas')->insertGetId([
+                'nombre' => 'Armando', 
+                'apellido' => 'Paredes',
+                'carnet' => '7859806',
+                'telefono_id' => $telefono_id, 
+                // 'password' => bcrypt('123'),
+        ]);
+        DB::table('usuarios')->insert([
+            'username' => 'admin',
+            'password' => bcrypt('123'),
+            'persona_id' => $persona_id
         ]);
     }
 }
