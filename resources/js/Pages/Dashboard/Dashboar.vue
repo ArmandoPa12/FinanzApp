@@ -101,19 +101,19 @@
             </th>
             <th class="p-1 border-b border-slate-300 bg-slate-50">
               <p class="block text-sm font-normal leading-none text-slate-500">
-                Entrada
+                Monto
               </p>
             </th>
             <th class="p-1 border-b border-slate-300 bg-slate-50">
               <p class="block text-sm font-normal leading-none text-slate-500">
-                Salida
+                Metodo pago
               </p>
             </th>
-            <th class="p-1 border-b border-slate-300 bg-slate-50">
+            <!-- <th class="p-1 border-b border-slate-300 bg-slate-50">
               <p class="block text-sm font-normal leading-none text-slate-500">
-                Tipo pago
+                QR
               </p>
-            </th>
+            </th> -->
             <th class="p-1 border-b border-slate-300 bg-slate-50">
               <p class="block text-sm font-normal leading-none text-slate-500">
                 Persona
@@ -145,20 +145,14 @@
                 {{ tran.descripcion || 'Sin descripción' }}
               </p>
             </td>
-            <td class="p-1 border-b border-slate-200" :class="tran.tipo == '0' ? 'bg-green-200' : ''">
+            <td class="p-1 border-b border-slate-200" :class="tran.tipo == '0' ? 'bg-green-200' : 'bg-red-200'">
               <p class="block text-sm text-slate-800">
-
-                {{ tran.tipo == '0' ? tran.monto + ' Bs' : '' }}
-              </p>
-            </td>
-            <td class="p-1 border-b border-slate-200" :class="tran.tipo == '0' ? '' : 'bg-red-200'">
-              <p class="block text-sm text-slate-800">
-                {{ tran.tipo == '1' ? '-' + tran.monto + ' Bs' : '' }}
+                {{ (tran.tipo == '0' ? tran.monto  : '-' + tran.monto) + ' Bs' }}     
               </p>
             </td>
             <td class="p-1 border-b border-slate-200">
               <p class="block text-sm text-slate-800">
-                {{ tran.tipo_pago == '1' ? 'Qr' : 'Efectivo' }}
+                {{ tran.tipo_pago == '0' ? 'Efectivo' : 'Qr'  }} 
               </p>
             </td>
             <td class="p-1 border-b border-slate-200">
@@ -180,7 +174,7 @@
           </tr>
 
         </tbody>
-        <tfoot>
+        <!-- <tfoot>
           <tr>
             <td colspan="3" class="p-4 text-left font-bold text-slate-800 border-t border-slate-300">
             </td>
@@ -197,7 +191,7 @@
               {{ total.toFixed(2) }} Bs
             </td>
           </tr>
-        </tfoot>
+        </tfoot> -->
       </table>
     </div>
   </div>
@@ -210,8 +204,6 @@ import Layout from '../Layout/Layout.vue'
 import Modal from '../../../js/Components/Modal.vue';
 import Delete from './Transaccion/Delete.vue';
 import { computed, ref, watch } from 'vue';
-
-// const { usuario, transacciones, categorias } = usePage().props
 
 const page = usePage()
 const usuario = computed(() => page.props.usuario)
@@ -229,24 +221,6 @@ function handleDelete() {
   showModal.value = false
   router.visit('/dashboard', { method: 'get' })
 }
-
-
-
-console.log(transacciones);
-
-const totalEntradas = computed(() =>
-  transacciones.value
-    .filter(t => t.tipo === false)
-    .reduce((acc, t) => acc + parseFloat(t.monto), 0)
-)
-const totalGastos = computed(() =>
-  transacciones.value
-    .filter(t => t.tipo === true)
-    .reduce((acc, t) => acc + parseFloat(t.monto), 0)
-)
-
-const total = computed(() => totalEntradas.value - totalGastos.value)
-
 
 
 // filtros

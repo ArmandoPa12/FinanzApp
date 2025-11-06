@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->boolean('tipo'); // 'ENTRADA' false, 'GASTO' true
             $table->decimal('monto', 10, 2);
-            $table->boolean('tipo_pago'); //QR false, EFECTIVO true
+            $table->boolean('tipo_pago'); //QR true, EFECTIVO false
             $table->text('descripcion')->nullable();
 
             $table->foreignId('categoria_id')

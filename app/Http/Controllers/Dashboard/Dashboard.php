@@ -7,6 +7,7 @@ use App\Models\Categoria;
 use App\Models\Transaccion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class Dashboard extends Controller
 {
@@ -16,7 +17,7 @@ class Dashboard extends Controller
         $query = Transaccion::with(['categoria', 'persona']);
         if ($request->filled('from') && $request->filled('to')) {
             $query->whereBetween('fecha', [$request->from, $request->to]);
-        } elseif ($request->filled('days')) {
+        } elseif ($request->filled('days') && $request->days != 0) {
             $query->where('fecha', '>=', now()->subDays($request->days));
         }
 
@@ -28,16 +29,21 @@ class Dashboard extends Controller
         if ($request->filled('tipo') && $request->tipo != 0) {
             $query->where('tipo', $request->tipo);
         }
-        
-        if ($request->filled('tipo_pago') && $request->tipo_pago != 0 ) {
+
+        if ($request->filled('tipo_pago') && $request->tipo_pago != 0) {
             $query->where('tipo_pago', $request->tipo_pago);
-        }   
+        }
 
         if ($request->filled('sort') && in_array($request->sort, ['asc', 'desc'])) {
             $query->orderBy('monto', $request->sort);
         } else {
-            $query->orderBy('fecha', 'desc');
+            $query->orderBy('fecha', 'asc');
         }
+
+        Log::info('Dashboard filters', $request->all());
+        Log::info('Query SQL', ['sql' => $query->toSql(), 'bindings' => $query->getBindings()]);
+        Log::info('Transacciones result count', ['count' => $query->count()]);
+
 
         return inertia('Dashboard/Dashboar', [
             'usuario' => [
