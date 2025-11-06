@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 100);
             $table->string('apellido', 100);
-            $table->string('carnet', 100)->unique();  
+            $table->string('carnet', 100)->unique()->nullable();  
             $table->foreignId('telefono_id')
                   ->nullable()
                   ->constrained('telefonos')

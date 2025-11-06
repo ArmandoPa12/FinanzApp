@@ -8,8 +8,8 @@
             <input placeholder="apellido" class="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" v-model="form.apellido">
             <div v-if="form.errors.apellido">{{ form.errors.apellido }}</div>
 
-            <input placeholder="carnet" class="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" v-model="form.carnet">
-            <div v-if="form.errors.carnet">{{ form.errors.carnet }}</div>
+            <!-- <input placeholder="carnet" class="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" v-model="form.carnet">
+            <div v-if="form.errors.carnet">{{ form.errors.carnet }}</div> -->
 
             <input placeholder="usuario" class="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" v-model="form.username">
             <div v-if="form.errors.username">{{ form.errors.username }}</div>
@@ -35,7 +35,7 @@ import { useForm } from '@inertiajs/vue3'
 const form = useForm({
     nombre: '',
     apellido: '',
-    carnet:'',
+    // carnet:'',
     username: '',
     password: '',
 })

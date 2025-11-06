@@ -24,7 +24,7 @@ class Register extends Controller
             'username' => 'required|string|max:50|unique:usuarios,username',
             'password' => 'required|string|min:3',
             'apellido' => 'nullable|string|max:100',
-            'carnet' => 'nullable|string|max:20|unique:personas,carnet',
+            // 'carnet' => 'nullable|string|max:20|unique:personas,carnet',
 
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
@@ -42,7 +42,7 @@ class Register extends Controller
 
             'apellido.string' => 'El apellido debe ser texto válido.',
             'apellido.max' => 'El apellido no puede tener más de 100 caracteres.',
-            'carnet.unique' => 'El número de carnet ya está registrado.',
+            // 'carnet.unique' => 'El número de carnet ya está registrado.',
 
         ]);
 
@@ -50,7 +50,7 @@ class Register extends Controller
         $persona = Persona::create([
             'nombre' => $request->nombre,
             'apellido' => $request->apellido,
-            'carnet' => $request->carnet,
+            // 'carnet' => $request->carnet,
         ]);
 
         $usuario = Usuario::create([
